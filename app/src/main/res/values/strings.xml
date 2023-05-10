@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">client_in_time</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="nav_title_main">Main</string>
+    <string name="nav_title_cart">Cart</string>
+    <string name="nav_title_orders">Orders</string>
+    <string name="nav_title_profile">Profile</string>
 </resources>
