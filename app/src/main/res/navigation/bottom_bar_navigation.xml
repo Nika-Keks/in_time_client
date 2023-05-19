@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_bar_navigation"
-    app:startDestination="@+id/navigation_main">
+    app:startDestination="@id/navigation_main">
 
     <fragment
         android:id="@+id/navigation_main"
         android:name="com.example.client_in_time.ui.MainFragment"
-        android:label="MainFragment"
+        android:label="Main"
         tools:layout="@layout/fragment_main"/>
     <fragment
         android:id="@+id/navigation_cart"
         android:name="com.example.client_in_time.ui.CartFragment"
-        android:label="CartFragment"
+        android:label="Cart"
         tools:layout="@layout/fragment_cart"/>
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.client_in_time.ui.ProfileFragment"
-        android:label="ProfileFragment"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile"/>
     <fragment
         android:id="@+id/navigation_orders"
         android:name="com.example.client_in_time.ui.OrdersFragment"
-        android:label="OrdersFragment"
+        android:label="Orders"
         tools:layout="@layout/fragment_orders"/>
 </navigation>
