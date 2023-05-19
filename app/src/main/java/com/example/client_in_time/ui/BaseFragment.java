@@ -2,7 +2,6 @@ package com.example.client_in_time.ui;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SimpleAdapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewbinding.ViewBinding;

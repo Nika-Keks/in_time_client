@@ -1,4 +1,4 @@
-package com.example.client_in_time.ui;
+package com.example.client_in_time.models;
 
 import androidx.lifecycle.ViewModel;
 

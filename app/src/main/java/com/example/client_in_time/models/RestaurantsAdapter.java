@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.client_in_time.App;
 import com.example.client_in_time.R;
+import com.example.client_in_time.api_in_time.apitypes.Restaurant;
 import com.example.client_in_time.databinding.RestaurantItemBinding;
 
 import java.util.ArrayList;
@@ -17,6 +17,7 @@ import java.util.List;
 public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.RestaurantsViewHolder> {
     private List<Restaurant> restaurants;
     Listener listener;
+
     static class RestaurantsViewHolder extends RecyclerView.ViewHolder {
         public RestaurantItemBinding binding;
         public RestaurantsViewHolder(RestaurantItemBinding _binding){
@@ -31,7 +32,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
     public RestaurantsAdapter(Listener listener){
         this.listener = listener;
-        this.restaurants = new ArrayList<Restaurant>();
+        this.restaurants = new ArrayList<>();
     }
 
     public void setRestaurants(List<Restaurant> restaurants){
@@ -54,8 +55,8 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         Restaurant rest = restaurants.get(position);
         if (rest == null)
             return;
-        holder.binding.restName.setText(rest.name);
-        holder.binding.restDesc.setText("some desc");
+        holder.binding.restName.setText(Integer.toString(rest.id));
+        holder.binding.restDesc.setText(rest.description);
         holder.binding.restImage.setImageResource(R.drawable.baseline_restaurant_menu_24);
         holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override

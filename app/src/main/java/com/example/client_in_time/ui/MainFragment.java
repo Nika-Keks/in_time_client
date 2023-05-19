@@ -1,8 +1,6 @@
 package com.example.client_in_time.ui;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +8,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.client_in_time.api_in_time.apitypes.Restaurant;
 import com.example.client_in_time.databinding.FragmentMainBinding;
-import com.example.client_in_time.models.Restaurant;
+import com.example.client_in_time.models.MainViewModel;
 import com.example.client_in_time.models.RestaurantsAdapter;
 
 import java.util.List;
@@ -72,11 +70,8 @@ public class MainFragment extends BaseFragment {
             state = State.LOADING;
             mainViewModel.loadRestaurants(loadListener);
         });
-        restaurantsAdapter = new RestaurantsAdapter(new RestaurantsAdapter.Listener() {
-            @Override
-            public void invoke(Restaurant restaurant) {
-                Toast.makeText(getContext(), restaurant.name, Toast.LENGTH_SHORT).show();
-            }
+        restaurantsAdapter = new RestaurantsAdapter(restaurant -> {
+            Toast.makeText(getContext(), restaurant.description, Toast.LENGTH_SHORT).show();
         });
 
         binding.mainRestaurantList.setLayoutManager(new LinearLayoutManager(getContext()));
