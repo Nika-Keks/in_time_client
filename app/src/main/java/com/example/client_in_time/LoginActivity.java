@@ -1,37 +1,32 @@
 package com.example.client_in_time;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.client_in_time.databinding.ActivityLoginBinding;
+import com.example.client_in_time.ui.LoginFragment;
+
 
 public class LoginActivity extends AppCompatActivity {
 
+    ActivityLoginBinding binding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activirt_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        EditText loginInput = findViewById(R.id.edit_login);
-        EditText passwordInput = findViewById(R.id.edit_password);
-        Button loginBtn = findViewById(R.id.btn_login);
-
-        loginBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                goToMain();
-            }
-        });
+        showLoginFragment(savedInstanceState);
     }
 
-    protected void goToMain() {
-        Intent sendIntent = new Intent(this, MainActivity.class);
-        startActivity(sendIntent);
+    private void showLoginFragment(Bundle savedInstanceState){
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.fragment_container_view, LoginFragment.class, null)
+                    .commit();
+        }
     }
-
 }

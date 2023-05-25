@@ -9,4 +9,7 @@
     <string name="list_is_empty">list is empty</string>
     <string name="try_again">Try again</string>
     <string name="load_error">Load error</string>
+    <string name="sign_in">signin</string>
+    <string name="error_login">Login error, check you internet</string>
+    <string name="invalid_login">Invalid email or password</string>
 </resources>

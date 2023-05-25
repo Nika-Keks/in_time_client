@@ -73,6 +73,17 @@ public class HttpAPI {
             return new ArrayList<>();
         }
     }
+
+    public int login(String email, String password){
+        try {
+            Response<LoginResponse> loginResponse = restAPI.login(email, password).execute();
+            return loginResponse.code();
+        }
+        catch (Throwable e){
+            Log.e("DEB", e.toString());
+        }
+        return 400;
+    }
 }
 
 
