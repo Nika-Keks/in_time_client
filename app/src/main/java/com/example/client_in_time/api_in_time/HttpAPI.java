@@ -1,7 +1,11 @@
 package com.example.client_in_time.api_in_time;
 
+import static java.net.HttpURLConnection.HTTP_OK;
+
 import android.util.Log;
 
+import com.example.client_in_time.api_in_time.apitypes.Dish;
+import com.example.client_in_time.api_in_time.apitypes.DishesResponse;
 import com.example.client_in_time.api_in_time.apitypes.LoginResponse;
 import com.example.client_in_time.api_in_time.apitypes.Restaurant;
 import com.example.client_in_time.api_in_time.apitypes.RestaurantsResponse;
@@ -18,8 +22,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -47,6 +55,10 @@ public class HttpAPI {
         @Headers("accept: application/json")
         @GET("Restaurant/restaurants")
         Call<RestaurantsResponse> getRestaurants(@Query("page") int page, @Query("per_page") int per_page);
+
+        @Headers("accept: application/json")
+        @GET("Dish/dishes/{restaurantId}")
+        Call<DishesResponse> getDishes(@Path("restaurantId") int restaurantId, @Query("page") int page, @Query("per_page") int per_page);
     }
     private HttpAPI(){
         url = "http://10.0.2.2:5000";
@@ -63,7 +75,6 @@ public class HttpAPI {
 
     public List<Restaurant> getRestaurants(int page, int per_page){
         try {
-            Response<LoginResponse> lr = restAPI.login("qwe", "qwe").execute();
             Response<RestaurantsResponse> response = restAPI.getRestaurants(page, per_page).execute();
 
             return Arrays.asList(response.body().items);
@@ -72,6 +83,18 @@ public class HttpAPI {
             Log.e("DEB", e.toString());
             return new ArrayList<>();
         }
+    }
+
+    public List<Dish> getDishes(int page, int per_page, int restaurantId){
+        try{
+            Response<DishesResponse> dishesResponse = restAPI.getDishes(restaurantId, page, per_page).execute();
+            if (dishesResponse.code() == HTTP_OK)
+                return Arrays.asList(dishesResponse.body().items);
+        }
+        catch (Throwable e){
+            Log.e("DEB", e.toString());
+        }
+        return new ArrayList<>();
     }
 
     public int login(String email, String password){

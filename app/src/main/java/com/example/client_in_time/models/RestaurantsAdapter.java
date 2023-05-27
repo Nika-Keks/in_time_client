@@ -58,12 +58,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         holder.binding.restName.setText(Integer.toString(rest.id));
         holder.binding.restDesc.setText(rest.description);
         holder.binding.restImage.setImageResource(R.drawable.baseline_restaurant_menu_24);
-        holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.invoke(rest);
-            }
-        });
+        holder.binding.getRoot().setOnClickListener(view -> listener.invoke(rest));
     }
 
     @Override

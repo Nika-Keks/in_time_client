@@ -22,7 +22,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class MainViewModel extends ViewModel {
     private final MutableLiveData<List<Restaurant>> restaurants;
     private final Scheduler scheduler = Schedulers.single();
-    private final HttpAPI restaurantsAPI = HttpAPI.getInstance();
+    private final HttpAPI api = HttpAPI.getInstance();
     public enum LoadRC{
         SUCCESS,
         ERROR
@@ -54,7 +54,7 @@ public class MainViewModel extends ViewModel {
 
     private Single<List<Restaurant>> getSingle(){
         Single<List<Restaurant>> out = Single.create(emitter -> {
-            List<Restaurant> rests = restaurantsAPI.getRestaurants(0, 10);
+            List<Restaurant> rests = api.getRestaurants(0, 10);
             emitter.onSuccess(rests);
         });
         return out;

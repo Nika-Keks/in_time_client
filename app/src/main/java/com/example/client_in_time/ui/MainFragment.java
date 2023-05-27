@@ -8,9 +8,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.client_in_time.R;
 import com.example.client_in_time.api_in_time.apitypes.Restaurant;
 import com.example.client_in_time.databinding.FragmentMainBinding;
 import com.example.client_in_time.models.MainViewModel;
@@ -72,6 +75,7 @@ public class MainFragment extends BaseFragment {
         });
         restaurantsAdapter = new RestaurantsAdapter(restaurant -> {
             Toast.makeText(getContext(), restaurant.description, Toast.LENGTH_SHORT).show();
+            goToDishes(restaurant);
         });
 
         binding.mainRestaurantList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -107,6 +111,15 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void goToDishes(Restaurant restaurant){
+        DishesFragment dishesFragment = new DishesFragment(restaurant);
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_main, dishesFragment, restaurant.description);
+        goneAll(binding);
+        fragmentTransaction.commit();
     }
 
     @Override
