@@ -35,7 +35,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishesView
     }
 
     public void setDishes(List<Dish> dishes){
-        this.dishes.clear();
+        //this.dishes.clear();
         this.dishes = dishes;
         notifyDataSetChanged();
     }
@@ -54,7 +54,7 @@ public class DishesAdapter extends RecyclerView.Adapter<DishesAdapter.DishesView
         Dish dish = dishes.get(position);
         if (dish == null)
             return;
-        holder.binding.dishName.setText(Integer.toString(dish.id));
+        holder.binding.dishName.setText(dish.name);
         holder.binding.dishDesc.setText(dish.description);
         holder.binding.dishImage.setImageResource(R.drawable.baseline_fastfood_64);
         holder.binding.getRoot().setOnClickListener(view -> listener.invoke(dish));

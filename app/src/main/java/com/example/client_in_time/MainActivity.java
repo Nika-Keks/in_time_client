@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -22,12 +23,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
+
             Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
             binding = ActivityMainBinding.inflate(getLayoutInflater());
             setContentView(binding.getRoot());
 
             AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.navigation_cart, R.id.navigation_main, R.id.navigation_orders, R.id.navigation_profile
+                    R.id.navigation_cart, R.id.main_nav_graph, R.id.navigation_orders, R.id.navigation_profile
             ).build();
 
             NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main);
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         catch (Exception e){
-            Log.e("DEGUG", e.toString());
+            Log.e("DEGUG", e.getStackTrace().toString());
             throw e;
         }
     }

@@ -8,22 +8,22 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.client_in_time.R;
 import com.example.client_in_time.api_in_time.apitypes.Restaurant;
-import com.example.client_in_time.databinding.FragmentMainBinding;
+import com.example.client_in_time.databinding.FragmentRestaurantsBinding;
 import com.example.client_in_time.models.MainViewModel;
 import com.example.client_in_time.models.RestaurantsAdapter;
 
 import java.util.List;
 
-public class MainFragment extends BaseFragment {
+public class RestaurantsFragment extends BaseFragment {
 
-    FragmentMainBinding binding;
+    FragmentRestaurantsBinding binding;
     MainViewModel mainViewModel;
     RestaurantsAdapter restaurantsAdapter;
 
@@ -65,7 +65,7 @@ public class MainFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        binding = FragmentMainBinding.inflate(inflater, container, false);
+        binding = FragmentRestaurantsBinding.inflate(inflater, container, false);
         goneAll(binding);
         binding.mainLoadTryAgainBtn.setOnClickListener(view -> {
             goneAll(binding);
@@ -103,7 +103,7 @@ public class MainFragment extends BaseFragment {
             case LOAD_ERROR:
                 binding.mainListLoadError.setVisibility(View.VISIBLE);
                 break;
-        };
+        }
         Toast.makeText(getContext(), "main", Toast.LENGTH_SHORT).show();
 
         return binding.getRoot();
@@ -114,12 +114,19 @@ public class MainFragment extends BaseFragment {
     }
 
     public void goToDishes(Restaurant restaurant){
-        DishesFragment dishesFragment = new DishesFragment(restaurant);
-        FragmentManager fragmentManager = getParentFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_main, dishesFragment, restaurant.description);
-        goneAll(binding);
-        fragmentTransaction.commit();
+//        DishesFragment dishesFragment = new DishesFragment(restaurant);
+//        FragmentManager fragmentManager = getParentFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.add(R.id.fragment_main, dishesFragment, restaurant.description);
+//        goneAll(binding);
+//        fragmentTransaction.commit();
+        Bundle bundle = new Bundle();
+        bundle.putInt("restaurantId", restaurant.id);
+        NavController navController = Navigation.findNavController(getActivity(), R.id.fragment_main);
+        if (navController.getCurrentDestination() != navController.findDestination(R.id.fragment_dishes)) {
+            navController.navigate(R.id.action_navigation_main_to_dishesFragment, bundle);
+
+        }
     }
 
     @Override

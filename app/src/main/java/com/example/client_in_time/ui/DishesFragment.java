@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,7 +21,7 @@ public class DishesFragment extends BaseFragment{
     FragmentDishesBinding binding;
     DishesViewModel dishesViewModel;
     DishesAdapter dishesAdapter;
-    final Restaurant restaurant;
+    Integer restaurantId;
     enum State{
         INIT,
         LOADING,
@@ -47,15 +48,14 @@ public class DishesFragment extends BaseFragment{
         }
     };
 
-    public DishesFragment(Restaurant restaurant){
-
-        this.restaurant = restaurant;
+    public DishesFragment(){
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        if (restaurantId == null)
+            restaurantId = getArguments().getInt("restaurantId");
         binding = FragmentDishesBinding.inflate(inflater, container, false);
         dishesViewModel = new ViewModelProvider(this).get(DishesViewModel.class);
 
@@ -64,7 +64,7 @@ public class DishesFragment extends BaseFragment{
             goneAll(binding);
             binding.mainProgress.setVisibility(View.VISIBLE);
             state = DishesFragment.State.LOADING;
-            dishesViewModel.loadDishes(0, 10, restaurant.id, loadListener);
+            dishesViewModel.loadDishes(0, 10, restaurantId, loadListener);
         });
         dishesAdapter = new DishesAdapter(dishes -> {
             Toast.makeText(getContext(), dishes.description, Toast.LENGTH_SHORT).show();
@@ -80,7 +80,7 @@ public class DishesFragment extends BaseFragment{
         switch (state){
             case INIT:
                 binding.mainProgress.setVisibility(View.VISIBLE);
-                dishesViewModel.loadDishes(0,10, restaurant.id, loadListener);
+                dishesViewModel.loadDishes(0,10, restaurantId, loadListener);
                 state = DishesFragment.State.LOADING;
                 break;
             case LOADING:
@@ -106,4 +106,5 @@ public class DishesFragment extends BaseFragment{
         binding = null;
         super.onDestroyView();
     }
+
 }

@@ -3,13 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_bar_navigation"
-    app:startDestination="@id/navigation_main">
+    app:startDestination="@id/main_nav_graph">
 
-    <fragment
-        android:id="@+id/navigation_main"
-        android:name="com.example.client_in_time.ui.MainFragment"
-        android:label="Main"
-        tools:layout="@layout/fragment_main"/>
     <fragment
         android:id="@+id/navigation_cart"
         android:name="com.example.client_in_time.ui.CartFragment"
@@ -25,4 +20,7 @@
         android:name="com.example.client_in_time.ui.OrdersFragment"
         android:label="Orders"
         tools:layout="@layout/fragment_orders"/>
+
+    <include app:graph="@navigation/main_nav_graph" />
+
 </navigation>

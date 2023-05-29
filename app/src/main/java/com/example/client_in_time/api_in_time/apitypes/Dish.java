@@ -10,7 +10,7 @@ public class Dish {
     @SerializedName("image_path")
     public String imagePath;
     @SerializedName("restaurant_id")
-    public String restaurantId;
+    public int restaurantId;
     public String status;
     public int price;
     public String description;
