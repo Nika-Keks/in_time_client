@@ -4,6 +4,10 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.client_in_time.databinding.ActivityLoginBinding;
 import com.example.client_in_time.ui.LoginFragment;
@@ -18,7 +22,6 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        showLoginFragment(savedInstanceState);
     }
 
     private void showLoginFragment(Bundle savedInstanceState){

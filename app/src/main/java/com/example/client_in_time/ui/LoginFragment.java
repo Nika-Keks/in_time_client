@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.client_in_time.MainActivity;
 import com.example.client_in_time.R;
@@ -58,7 +60,10 @@ public class LoginFragment extends Fragment {
             );
         });
 
-        Toast.makeText(getContext(), "login", Toast.LENGTH_LONG).show();
+        binding.btnSignIn.setOnClickListener(view -> {
+            NavController navController = Navigation.findNavController(getActivity(), R.id.fragment_container_view);
+            navController.navigate(R.id.action_loginFragment_to_signinFragment);
+        });
 
         return binding.getRoot();
     }

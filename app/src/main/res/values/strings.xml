@@ -12,4 +12,5 @@
     <string name="sign_in">signin</string>
     <string name="error_login">Login error, check you internet</string>
     <string name="invalid_login">Invalid email or password</string>
+    <string name="name">Name</string>
 </resources>

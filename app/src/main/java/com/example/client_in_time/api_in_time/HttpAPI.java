@@ -1,5 +1,6 @@
 package com.example.client_in_time.api_in_time;
 
+import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 import android.util.Log;
@@ -59,6 +60,10 @@ public class HttpAPI {
         @Headers("accept: application/json")
         @GET("Dish/dishes/{restaurantId}")
         Call<DishesResponse> getDishes(@Path("restaurantId") int restaurantId, @Query("page") int page, @Query("per_page") int per_page);
+
+        @Headers("accept: application/json")
+        @POST("Authentication/signup")
+        Call<LoginResponse> signin(@Query("name") String name, @Query("email") String email, @Query("password") String password);
     }
     private HttpAPI(){
         url = "http://10.0.2.2:5000";
@@ -100,6 +105,19 @@ public class HttpAPI {
     public int login(String email, String password){
         try {
             Response<LoginResponse> loginResponse = restAPI.login(email, password).execute();
+            return loginResponse.code();
+        }
+        catch (Throwable e){
+            Log.e("DEB", e.toString());
+        }
+        return 400;
+    }
+
+    public int signin(String name, String email, String password){
+        try {
+            Response<LoginResponse> loginResponse = restAPI.signin(name, email, password).execute();
+            if (loginResponse.code() == HTTP_OK)
+                return login(email, password);
             return loginResponse.code();
         }
         catch (Throwable e){
