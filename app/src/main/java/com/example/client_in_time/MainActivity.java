@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.client_in_time.api_in_time.HttpAPI;
 import com.example.client_in_time.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,5 +43,11 @@ public class MainActivity extends AppCompatActivity {
             Log.e("DEGUG", e.getStackTrace().toString());
             throw e;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        HttpAPI.getInstance().resetPreferensec();
+        super.onDestroy();
     }
 }

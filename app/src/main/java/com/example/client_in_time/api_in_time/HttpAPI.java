@@ -125,6 +125,10 @@ public class HttpAPI {
         }
         return 400;
     }
+
+    public void resetPreferensec(){
+        preferences.clear();
+    }
 }
 
 
